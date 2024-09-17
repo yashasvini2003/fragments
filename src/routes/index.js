@@ -36,3 +36,36 @@ router.get('/', (req, res) => {
 });
 
 module.exports = router;
+
+
+
+
+/* const express = require('express');
+const { version, author } = require('../../package.json');
+const { authenticate } = require('../auth');
+const { createSuccessResponse } = require('../response');
+
+const router = express.Router();
+
+// Apply authentication middleware to API routes
+router.use('/v1', authenticate(), require('./api'));
+
+/**
+ * Define a simple health check route. If the server is running
+ * we'll respond with a 200 OK. If not, the server isn't healthy.
+ */
+/** router.get('/', (req, res) => {
+  // Client's shouldn't cache this response (always request it fresh)
+  res.setHeader('Cache-Control', 'no-cache');
+  
+  // Use createSuccessResponse to send the response
+  res.status(200).json(createSuccessResponse({
+    status: 'ok',
+    author,
+    githubUrl: 'https://github.com/REPLACE_WITH_YOUR_GITHUB_USERNAME/fragments',
+    version,
+  }));
+});
+
+module.exports = router;
+ */
