@@ -10,8 +10,8 @@ describe('404 Handler', () => {
       status: 'error',
       error: {
         message: 'not found',
-        code: 404
-      }
+        code: 404,
+      },
     });
   });
 });
