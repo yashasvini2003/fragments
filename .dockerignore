@@ -1,0 +1,29 @@
+# Ignore Git repository files
+.git/
+.gitignore
+
+# Ignore Node.js modules (we will install them inside the container)
+node_modules/
+
+# Ignore editor and IDE settings
+.vscode/
+
+# Ignore GitHub-specific configurations
+.github/
+
+# Ignore code coverage reports
+coverage/
+
+# Ignore test-related files and folders
+tests/
+!tests/.htpasswd
+
+# Ignore environment variable files (secrets shouldn't be included in images)
+.env
+
+# Ignore ESLint and Prettier configuration files
+eslint.config.mjs
+.prettier*
+
+# Ignore Jest configuration and cache files
+jest*
