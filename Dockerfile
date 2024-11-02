@@ -8,7 +8,7 @@
 FROM node:18.13.0-alpine3.17.1@sha256:fda98168118e5a8f4269efca4101ee51dd5c75c0fe56d8eb6fad80455c2f5827 AS build
 
 # Setting Environment var to production
-ENV NODE_ENV = production
+ENV NODE_ENV=production
 
 # Set the working directory
 WORKDIR /app
