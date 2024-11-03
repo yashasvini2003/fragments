@@ -39,6 +39,9 @@ ENV PORT=8080 \
 # Use the working directory
 WORKDIR /app
 
+# Copy package.json and package-lock.json to /app in the production stage
+COPY package*.json ./
+
 # Copy the installed node_modules from the build stage
 COPY --from=build /app/node_modules ./node_modules
 
