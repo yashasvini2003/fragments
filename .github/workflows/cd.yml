@@ -46,7 +46,7 @@ jobs:
           # Hard-code our region, which isn't a secret, and won't change
           aws-region: us-east-1
 
-      # Login to our ECR repository using the configured credentials.
+      # Login to our ECR repository using the configured credentials
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2  
