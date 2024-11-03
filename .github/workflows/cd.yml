@@ -31,7 +31,7 @@ jobs:
       
       # Use buildx, which is faster and can optimize the build steps
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
       
       # NOTE: ending and restarting the Learner Lab will void these secrets,
       # update them if you are doing this during a new session:
@@ -64,7 +64,7 @@ jobs:
           # if we have to test or debug something. Second, we'll also replace the
           # `latest` tag, since this is our most up-to-date version.
           VERSION_TAG: ${{ github.ref_name }}
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v4.4.0
         with:
           push: true
           # Use the git tag version and `latest`
