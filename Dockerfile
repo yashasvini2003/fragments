@@ -27,7 +27,7 @@ FROM node:18.13.0-alpine3.17.1@sha256:fda98168118e5a8f4269efca4101ee51dd5c75c0fe
 
 # Adding Curl for health check
 RUN apk update && \
-    apk add --no-cache curl=8.2.1-r0
+    apk add --no-cache curl
 
 # Metadata about the image
 LABEL maintainer="Yashasvini Bhanuraj <yashasvinibhanuraj29@gmail.com>"
