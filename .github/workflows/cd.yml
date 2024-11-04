@@ -54,7 +54,7 @@ jobs:
       # Build and Push an Image to Amazon ECR.
       - name: Build and push to Amazon ECR
         env:
-          # Define an Environment Variable with our ECR Registry, getting
+          # Define an Environment Variable with our ECR Registry; getting
           # the value from the previous step's outputs
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           # Define an Environment Variable with our ECR Repository Name
