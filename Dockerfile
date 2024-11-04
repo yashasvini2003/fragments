@@ -46,7 +46,9 @@ COPY package*.json ./
 COPY --from=build /app/node_modules ./node_modules
 
 # Copy only necessary application files to the production image
-COPY ./src ./src
+COPY --from=build /app/src ./src  
+
+# Copy any additional necessary files (like .htpasswd)
 COPY ./tests/.htpasswd ./tests/.htpasswd
 
 # Health check for the service
