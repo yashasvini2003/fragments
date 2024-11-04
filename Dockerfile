@@ -1,69 +1,62 @@
-##########################################################
-# Dockerfile for Containerizing Fragments Microservice   #
-##########################################################
+########################################################
+# Dockerfile for Containerizing Fragments Microservice #
+########################################################
 
-# Stage 0: Build the application
+#######################################################################################################################
+
+# Stage 1: Build Stage
 FROM node:18.13.0-alpine3.17.1@sha256:fda98168118e5a8f4269efca4101ee51dd5c75c0fe56d8eb6fad80455c2f5827 AS build
 
 # Setting Environment var to production
 ENV NODE_ENV=production
 
-# Use /app as our working directory
+# Set the working directory
 WORKDIR /app
 
-# Copy package files
-COPY package.json package-lock.json ./
+# Copy only package files first for better caching
+COPY package*.json ./
 
-# Install node dependencies
+# Install dependencies
 RUN npm ci --only=production
 
-# Copy Source files
+# Copy source file
 COPY ./src ./src
 
-##################################################################################################################
+#######################################################################################################################
 
-# Stage 1: Create the production image
+# Stage 2: Production Stage
 FROM node:18.13.0-alpine3.17.1@sha256:fda98168118e5a8f4269efca4101ee51dd5c75c0fe56d8eb6fad80455c2f5827 AS production
-
-# Adding Curl for health check
-RUN apk update && \
-    apk add --no-cache curl
 
 # Metadata about the image
 LABEL maintainer="Yashasvini Bhanuraj <yashasvinibhanuraj29@gmail.com>"
 LABEL description="Fragments node.js microservice"
 
-# Creat a non-root user and switch to that user
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-USER appuser
+# Set environment variables for the service
+ENV PORT=8080 \
+    NPM_CONFIG_LOGLEVEL=warn \
+    NPM_CONFIG_COLOR=false
 
-# We default to use port 8080 in our service
-ENV PORT=8080
-
-# Reduce npm spam when installing within Docker
-# https://docs.npmjs.com/cli/v8/using-npm/config#loglevel
-ENV NPM_CONFIG_LOGLEVEL=warn
-
-# Disable color when run inside Docker
-# https://docs.npmjs.com/cli/v8/using-npm/config#color
-ENV NPM_CONFIG_COLOR=false
-
-# Use /app as our working directory
+# Use the working directory
 WORKDIR /app
 
-# Copy built files from the build stage
-# I am keeping package.json files deliberately. 
-COPY --from=build --chown=appuser:appgroup /app ./
+# Copy package.json and package-lock.json to /app in the production stage
+COPY package*.json ./
 
-# Copy the .htpasswd file from the same directory as the Dockerfile into the working directory (/app)
-COPY --chown=appuser:appgroup tests/.htpasswd .
+# Copy the installed node_modules from the build stage
+COPY --from=build /app/node_modules ./node_modules
 
-# Expose the application port
+# Copy only necessary application files to the production image
+COPY --from=build /app/src ./src  
+
+# Copy any additional necessary files (like .htpasswd)
+COPY ./tests/.htpasswd ./tests/.htpasswd
+
+# Health check for the service
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl --fail http://localhost:8080/ || exit 1
+
+# Expose the service port
 EXPOSE 8080
 
-# Healthcheck
-HEALTHCHECK --interval=30s --timeout=30s --start-period=10s --retries=3 \
-    CMD curl --fail localhost:8080 || exit 1
-
 # Start the application
-CMD ["node", "src/index.js"]
+CMD ["npm", "start"]
