@@ -19,7 +19,7 @@ COPY package*.json ./
 # Install dependencies
 RUN npm ci --only=production
 
-# Copy source file
+# Copy source files
 COPY ./src ./src
 
 #######################################################################################################################
