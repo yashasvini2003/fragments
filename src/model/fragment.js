@@ -14,15 +14,17 @@ const {
   deleteFragment,
 } = require('./data');
 
-const validTypes = [`text/plain`];
+const validTypes = [`text/plain`, `text/markdown`, `text/html`, `application/json`];
 
 const formats = {
   'text/plain': ['text/plain'],
+  'text/markdown': ['text/markdown', 'text/html', 'text/plain'],
+  'text/html': ['text/html', 'text/plain'],
+  'application/json': ['application/json', 'text/plain'],
 };
 
 class Fragment {
   constructor({ id, ownerId, created, updated, type, size = 0 }) {
-    // TODO
     if (!ownerId || !type) {
       throw new Error('ownerId and type are required');
     }
@@ -66,7 +68,6 @@ class Fragment {
    * @returns Promise<Array<Fragment>>
    */
   static async byUser(ownerId, expand = false) {
-    // TODO
     return listFragments(ownerId, expand);
   }
 
@@ -77,7 +78,6 @@ class Fragment {
    * @returns Promise<Fragment>
    */
   static async byId(ownerId, id) {
-    // TODO
     let data = await readFragment(ownerId, id);
 
     if (!data) {
@@ -102,7 +102,6 @@ class Fragment {
    * @returns Promise<void>
    */
   save() {
-    // TODO
     this.updated = new Date().toISOString();
     return writeFragment(this);
   }
@@ -112,7 +111,6 @@ class Fragment {
    * @returns Promise<Buffer>
    */
   async getData() {
-    // TODO
     return await readFragmentData(this.ownerId, this.id);
   }
 
@@ -122,7 +120,6 @@ class Fragment {
    * @returns Promise<void>
    */
   async setData(data) {
-    // TODO
     if (!(Buffer.isBuffer(data) || data)) throw new Error('supplied data is not Buffer');
     this.size = data.byteLength;
     this.save();
@@ -144,7 +141,6 @@ class Fragment {
    * @returns {boolean} true if fragment's type is text/*
    */
   get isText() {
-    // TODO
     return this.mimeType.includes('text');
   }
 
@@ -163,7 +159,6 @@ class Fragment {
    * @returns {boolean} true if we support this Content-Type (i.e., type/subtype)
    */
   static isSupportedType(value) {
-    // TODO
     return validTypes.includes(contentType.parse(value).type);
   }
 }
