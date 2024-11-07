@@ -30,4 +30,13 @@ describe('/ health check', () => {
     expect(res.body.githubUrl.startsWith('https://github.com/')).toBe(true);
     expect(res.body.version).toEqual(version);
   });
+
+  test('GET /nonexistent should return status 404 and an error message', async () => {
+    const response = await request(app).get('/nonexistent');
+
+    expect(response.status).toBe(404);
+    expect(response.body.status).toBe('error');
+    expect(response.body.error.message).toBe('not found');
+    expect(response.body.error.code).toBe(404);
+  });
 });
