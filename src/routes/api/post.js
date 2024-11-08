@@ -1,28 +1,24 @@
+// src/routes/api/post.js
+
+// Import required modules and dependencies
 const { createErrorResponse, createSuccessResponse } = require('../../response');
 const { Fragment } = require('../../model/fragment');
+//const hashUser = require('../../hash');
+const { validateContentType } = require('../../model/data/utils');
 const logger = require('../../logger');
 
+// Handler function for creating a new fragment
 async function createFragment(req, res) {
   // Get the owner ID by hashing the user and Content Type
   const ownerId = req.user;
   const contentType = req.headers['content-type'];
-  const reqBody = req.body;
-
-  if (!['text/plain'].includes(contentType)) {
-    res.status(415).json(createErrorResponse(415, 'unsupported type'));
-    return;
+  try {
+    // To check if the content type is valid
+    await validateContentType(req.body, contentType);
+  } catch (err) {
+    res.status(415).send(createErrorResponse(415, err.message));
+    return; // Exit the function to prevent further execution
   }
-
-  if (!Buffer.isBuffer(reqBody)) {
-    res.status(400).json(createErrorResponse(400, 'no data'));
-    return;
-  }
-
-  if (reqBody.toString().trim() == '') {
-    res.status(400).json(createErrorResponse(400, 'no data'));
-    return;
-  }
-
   try {
     // Create a new fragment object with owner ID and content type
     let data = new Fragment({ ownerId, type: contentType });
@@ -49,4 +45,6 @@ async function createFragment(req, res) {
   }
 }
 
-module.exports = createFragment;
+module.exports = {
+  createFragment,
+};
