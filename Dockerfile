@@ -5,7 +5,7 @@
 #######################################################################################################################
 
 # Stage 1: Build Stage
-FROM node:18.13.0-alpine3.17.1@sha256:fda98168118e5a8f4269efca4101ee51dd5c75c0fe56d8eb6fad80455c2f5827 AS build
+FROM node:20.1.0-alpine3.17@sha256:fda98168118e5a8f4269efca4101ee51dd5c75c0fe56d8eb6fad80455c2f5827 AS build
 
 # Setting Environment var to production
 ENV NODE_ENV=production
@@ -25,7 +25,7 @@ COPY ./src ./src
 #######################################################################################################################
 
 # Stage 2: Production Stage
-FROM node:18.13.0-alpine3.17.1@sha256:fda98168118e5a8f4269efca4101ee51dd5c75c0fe56d8eb6fad80455c2f5827 AS production
+FROM node:20.1.0-alpine3.17@sha256:fda98168118e5a8f4269efca4101ee51dd5c75c0fe56d8eb6fad80455c2f5827 AS production
 
 # Metadata about the image
 LABEL maintainer="Yashasvini Bhanuraj <yashasvinibhanuraj29@gmail.com>"
@@ -59,4 +59,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 EXPOSE 8080
 
 # Start the application
-CMD ["npm", "start"]
+CMD ["node", "src/index.js"]
