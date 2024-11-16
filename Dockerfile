@@ -5,7 +5,7 @@
 #######################################################################################################################
 
 # Stage 1: Build Stage
-FROM node:20.1.0-alpine3.17@sha256:fda98168118e5a8f4269efca4101ee51dd5c75c0fe56d8eb6fad80455c2f5827 AS build
+FROM node:22.11.0-alpine3.19 AS build
 
 # Setting Environment var to production
 ENV NODE_ENV=production
@@ -25,7 +25,7 @@ COPY ./src ./src
 #######################################################################################################################
 
 # Stage 2: Production Stage
-FROM node:20.1.0-alpine3.17@sha256:fda98168118e5a8f4269efca4101ee51dd5c75c0fe56d8eb6fad80455c2f5827 AS production
+FROM node:22.11.0-alpine3.19 AS production
 
 # Metadata about the image
 LABEL maintainer="Yashasvini Bhanuraj <yashasvinibhanuraj29@gmail.com>"
