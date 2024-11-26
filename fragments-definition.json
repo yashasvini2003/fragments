@@ -37,7 +37,7 @@
       "memoryReservation": 512,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "upatel93/fragments:latest",
+      "image": "yashasvini2003/fragments:latest",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
