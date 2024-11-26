@@ -95,9 +95,6 @@ jobs:
             AWS_S3_BUCKET_NAME=ybhanuraj-fragments
             AWS_COGNITO_POOL_ID=us-east-1_rMZuypQeC
             AWS_COGNITO_CLIENT_ID=33m7o8nejo29vc0fclo6565fv9
-            AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
-            AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            AWS_SESSION_TOKEN=${{ secrets.AWS_SESSION_TOKEN }}
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
