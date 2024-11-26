@@ -32,7 +32,7 @@ jsonpath "$.fragment.created" isString
 jsonpath "$.fragment.updated" isString
 # The fragment type should be "application/json"
 jsonpath "$.fragment.type" == "application/json"
-jsonpath "$.fragment.size" == 67
+jsonpath "$.fragment.size" == 72
 # Capture the Location URL into a variable named `url`
 [Captures]
 url: header "Location"
@@ -43,7 +43,7 @@ GET {{url}}
 user1@email.com:password1
 
 HTTP/1.1 200
-Content-Length: 67
+Content-Length: 72
 [Asserts]
 # The next line matches header for just application/json.
 header "Content-Type" matches "^application/json(; charset=utf-8)?$"
