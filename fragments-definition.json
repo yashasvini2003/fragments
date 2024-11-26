@@ -1,114 +1,116 @@
 {
-  "ipcMode": null,
-  "executionRoleArn": "arn:aws:iam::435645969049:role/LabRole",
+  "taskDefinitionArn": "arn:aws:ecs:us-east-1:435645969049:task-definition/fragments-task:3",
   "containerDefinitions": [
     {
-      "dnsSearchDomains": null,
-      "environmentFiles": null,
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "secretOptions": null,
-        "options": {
-          "awslogs-group": "/ecs/fragments-task",
-          "awslogs-region": "us-east-1",
-          "awslogs-stream-prefix": "ecs"
-        }
-      },
-      "entryPoint": [],
+      "name": "fragments-container",
+      "image": "yashasvini2003/fragments:latest",
+      "cpu": 256,
+      "memoryReservation": 512,
       "portMappings": [
         {
-          "hostPort": 8080,
+          "name": "fragments-container-80-tcp",
+          "containerPort": 80,
+          "hostPort": 80,
           "protocol": "tcp",
-          "containerPort": 8080
+          "appProtocol": "http"
         }
       ],
-      "command": [],
-      "linuxParameters": null,
-      "cpu": 256,
-      "environment": [],
-      "resourceRequirements": null,
-      "ulimits": null,
-      "dnsServers": null,
-      "mountPoints": [],
-      "workingDirectory": null,
-      "secrets": null,
-      "dockerSecurityOptions": null,
-      "memory": null,
-      "memoryReservation": 512,
-      "volumesFrom": [],
-      "stopTimeout": null,
-      "image": "yashasvini2003/fragments:latest",
-      "startTimeout": null,
-      "firelensConfiguration": null,
-      "dependsOn": null,
-      "disableNetworking": null,
-      "interactive": null,
-      "healthCheck": null,
       "essential": true,
-      "links": [],
-      "hostname": null,
-      "extraHosts": null,
-      "pseudoTerminal": null,
-      "user": null,
-      "readonlyRootFilesystem": null,
-      "dockerLabels": null,
-      "systemControls": null,
-      "privileged": null,
-      "name": "fragments"
+      "environment": [
+        {
+          "name": "AWS_SESSION_TOKEN",
+          "value": "IQoJb3JpZ2luX2VjEIv//////////wEaCXVzLXdlc3QtMiJHMEUCIQDewzG5JaPiq6GDkHcC8XhHkh9eFzFH4CTBg7R/D4BSJAIgVpabGId9cdDXqzw9ozRq740G2rDXtBrjjLrNpsXOoosqrwIINBABGgw0MzU2NDU5NjkwNDkiDMMUz7b0L3aDkfxrQSqMAkFxazSTTtSY5FXcYuZ0043GEH0h2WTSmtxOoY3PwqiBcBLLjSwJOwypUFOmID2UjcmFHby5K2MKVf4rO2fwOCcTI8hdhSag5M5BTSr/PWRytTWIf4MErTvVoHVGZgOorDZzAHmntqgnN/HFC7gTfA49LzXhzhc9DQtzc4/f3FdQOzWY2saiB/5CiOkm+Cc+IQ0zeGPmSSwEzbsj6BJcguH6OKNVLGYcEuKSz60NzAUCxgnPCl+0EtJ8Y7KrZ++4N6MqVPTlzbQW+cGZOU8bZMPtL9N5sQybeDIZxyda8nrZ+beCGyKTSvv93tTiTxGsRbQzo9iHZfIWk0BZQ3Zw1sStANV6Bkpj6M/c32gwrK6YugY6nQHGEeMjXVwJ4dVOwsz3zMo4FF0V1QiCnvHrbNxthr3bSoAxsoKZ6XpSTvrO8dmx2734BGmnSGte/zucR9WA9bMk/RYMbvegyAXT/T6XYFNf/58KkunEp7iAIS9JUOUukl3pVPyJAo0tDwt1dgokNZX7yK8grMnzYdsCEWUJwt+wf6tj3VwCPesdKUB7ooDTYjvTz39Pb+/ti7t5UNe+"
+        },
+        {
+          "name": "AWS_COGNITO_POOL_ID",
+          "value": "us-east-1_rMZuypQeC"
+        },
+        {
+          "name": "PORT",
+          "value": "80"
+        },
+        {
+          "name": "AWS_ACCESS_KEY_ID",
+          "value": "ASIAWK3UF6KMSG7SLHEV"
+        },
+        {
+          "name": "AWS_SECRET_ACCESS_KEY",
+          "value": "6bmmJWBoPpzbdQ3MzeMuoQonjQFyK8EXLwBVwuK/"
+        },
+        {
+          "name": "AWS_S3_BUCKET_NAME",
+          "value": "ybhanuraj-fragments"
+        },
+        {
+          "name": "AWS_COGNITO_CLIENT_ID",
+          "value": "33m7o8nejo29vc0fclo6565fv9"
+        }
+      ],
+      "environmentFiles": [],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "ulimits": [],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/fragments-task",
+          "mode": "non-blocking",
+          "awslogs-create-group": "true",
+          "max-buffer-size": "25m",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        },
+        "secretOptions": []
+      },
+      "systemControls": []
     }
   ],
-  "placementConstraints": [],
-  "memory": "512",
-  "taskRoleArn": "arn:aws:iam::435645969049:role/LabRole",
-  "compatibilities": ["EC2", "FARGATE"],
-  "taskDefinitionArn": "arn:aws:ecs:us-east-1:435645969049:task-definition/fragments-task:3",
   "family": "fragments-task",
+  "taskRoleArn": "arn:aws:iam::435645969049:role/LabRole",
+  "executionRoleArn": "arn:aws:iam::435645969049:role/LabRole",
+  "networkMode": "awsvpc",
+  "revision": 3,
+  "volumes": [],
+  "status": "ACTIVE",
   "requiresAttributes": [
     {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
       "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
     },
     {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
       "name": "ecs.capability.execution-role-awslogs"
     },
     {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
       "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
     },
     {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.28"
+    },
+    {
       "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
     },
     {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
+      "name": "com.amazonaws.ecs.capability.task-iam-role"
+    },
+    {
       "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
     },
     {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
       "name": "ecs.capability.task-eni"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
     }
   ],
-  "pidMode": null,
+  "placementConstraints": [],
+  "compatibilities": ["EC2", "FARGATE"],
   "requiresCompatibilities": ["FARGATE"],
-  "networkMode": "awsvpc",
-  "runtimePlatform": null,
   "cpu": "256",
-  "revision": 1,
-  "status": "ACTIVE",
-  "inferenceAccelerators": null,
-  "proxyConfiguration": null,
-  "volumes": []
+  "memory": "512",
+  "runtimePlatform": {
+    "cpuArchitecture": "X86_64",
+    "operatingSystemFamily": "LINUX"
+  },
+  "registeredAt": "2024-11-26T20:32:34.813Z",
+  "registeredBy": "arn:aws:sts::435645969049:assumed-role/voclabs/user1910854=ybhanuraj@myseneca.ca",
+  "tags": []
 }
