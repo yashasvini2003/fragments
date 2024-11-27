@@ -18,32 +18,8 @@
       "essential": true,
       "environment": [
         {
-          "name": "AWS_SESSION_TOKEN",
-          "value": "IQoJb3JpZ2luX2VjEIv//////////wEaCXVzLXdlc3QtMiJHMEUCIQDewzG5JaPiq6GDkHcC8XhHkh9eFzFH4CTBg7R/D4BSJAIgVpabGId9cdDXqzw9ozRq740G2rDXtBrjjLrNpsXOoosqrwIINBABGgw0MzU2NDU5NjkwNDkiDMMUz7b0L3aDkfxrQSqMAkFxazSTTtSY5FXcYuZ0043GEH0h2WTSmtxOoY3PwqiBcBLLjSwJOwypUFOmID2UjcmFHby5K2MKVf4rO2fwOCcTI8hdhSag5M5BTSr/PWRytTWIf4MErTvVoHVGZgOorDZzAHmntqgnN/HFC7gTfA49LzXhzhc9DQtzc4/f3FdQOzWY2saiB/5CiOkm+Cc+IQ0zeGPmSSwEzbsj6BJcguH6OKNVLGYcEuKSz60NzAUCxgnPCl+0EtJ8Y7KrZ++4N6MqVPTlzbQW+cGZOU8bZMPtL9N5sQybeDIZxyda8nrZ+beCGyKTSvv93tTiTxGsRbQzo9iHZfIWk0BZQ3Zw1sStANV6Bkpj6M/c32gwrK6YugY6nQHGEeMjXVwJ4dVOwsz3zMo4FF0V1QiCnvHrbNxthr3bSoAxsoKZ6XpSTvrO8dmx2734BGmnSGte/zucR9WA9bMk/RYMbvegyAXT/T6XYFNf/58KkunEp7iAIS9JUOUukl3pVPyJAo0tDwt1dgokNZX7yK8grMnzYdsCEWUJwt+wf6tj3VwCPesdKUB7ooDTYjvTz39Pb+/ti7t5UNe+"
-        },
-        {
-          "name": "AWS_COGNITO_POOL_ID",
-          "value": "us-east-1_rMZuypQeC"
-        },
-        {
           "name": "PORT",
           "value": "80"
-        },
-        {
-          "name": "AWS_ACCESS_KEY_ID",
-          "value": "ASIAWK3UF6KMSG7SLHEV"
-        },
-        {
-          "name": "AWS_SECRET_ACCESS_KEY",
-          "value": "6bmmJWBoPpzbdQ3MzeMuoQonjQFyK8EXLwBVwuK/"
-        },
-        {
-          "name": "AWS_S3_BUCKET_NAME",
-          "value": "ybhanuraj-fragments"
-        },
-        {
-          "name": "AWS_COGNITO_CLIENT_ID",
-          "value": "33m7o8nejo29vc0fclo6565fv9"
         }
       ],
       "environmentFiles": [],
