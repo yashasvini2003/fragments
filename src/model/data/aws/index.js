@@ -1,5 +1,5 @@
 const logger = require('../../../logger');
-const MemoryDB = require('../memory/memory-db'); // XXX: temporary use of memory-db until we add DynamoDB
+const { listFragments, writeFragment } = require('../memory'); // XXX: temporary use of memory-db until we add DynamoDB
 const s3Client = require('./s3Client');
 const { PutObjectCommand, GetObjectCommand, DeleteObjectCommand } = require('@aws-sdk/client-s3');
 
@@ -97,6 +97,8 @@ module.exports = {
   writeFragmentData,
   readFragmentData,
   deleteFragmentData,
+  listFragments,
+  writeFragment,
   // Temporarily export memory-based metadata functions
-  ...MemoryDB,
+  // ...MemoryDB,
 };
