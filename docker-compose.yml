@@ -12,8 +12,8 @@ services:
     environment:
       # Our API will be running on http://localhost:8080
       - API_URL=http://localhost:8080
-      - AWS_COGNITO_POOL_ID=${AWS_COGNITO_POOL_ID:-test}
-      - AWS_COGNITO_CLIENT_ID=${AWS_COGNITO_CLIENT_ID:-test}
+      #- AWS_COGNITO_POOL_ID=${AWS_COGNITO_POOL_ID:-test}
+      #- AWS_COGNITO_CLIENT_ID=${AWS_COGNITO_CLIENT_ID:-test}
       # Use Basic Auth (for running tests, CI)
       - HTPASSWD_FILE=tests/.htpasswd
       - LOG_LEVEL=${LOG_LEVEL:-debug}
