@@ -1,5 +1,5 @@
 const logger = require('../../../logger');
-//const { listFragments, writeFragment } = require('../memory'); // XXX: temporary use of memory-db until we add DynamoDB
+
 const s3Client = require('./s3Client');
 const ddbDocClient = require('./ddbDocClient');
 const { PutObjectCommand, GetObjectCommand, DeleteObjectCommand } = require('@aws-sdk/client-s3');
@@ -118,8 +118,7 @@ async function readFragmentData(ownerId, id) {
   }
 }
 
-// Get a list of fragments, either ids-only, or full Objects, for the given user.
-// Returns a Promise<Array<Fragment>|Array<string>|undefined>
+// Get a list of fragment ids/objects for the given user from memory db. Returns a Promise
 async function listFragments(ownerId, expand = false) {
   // Configure our QUERY params, with the name of the table and the query expression
   const params = {
@@ -158,7 +157,7 @@ async function listFragments(ownerId, expand = false) {
   }
 }
 
-// Delete a fragment's data from the S3 bucket and DynamoDB table. Returns a Promise.
+/// Delete a fragment's data from the S3 bucket and DynamoDB table. Returns a Promise.
 async function deleteFragment(ownerId, id) {
   // Prepare the parameters for the DeleteObjectCommand for S3
   const s3Params = {
@@ -208,12 +207,10 @@ async function deleteFragment(ownerId, id) {
     }
   }
 }
-// Export the functions for use in the backend
-module.exports = {
-  writeFragmentData,
-  readFragmentData,
-  deleteFragment,
-  listFragments,
-  writeFragment,
-  readFragment,
-};
+
+module.exports.listFragments = listFragments;
+module.exports.writeFragment = writeFragment;
+module.exports.readFragment = readFragment;
+module.exports.writeFragmentData = writeFragmentData;
+module.exports.readFragmentData = readFragmentData;
+module.exports.deleteFragment = deleteFragment;
