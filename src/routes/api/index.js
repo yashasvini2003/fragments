@@ -16,6 +16,7 @@ const { Fragment } = require('../../model/fragment');
 // Import route handlers
 const getHandlers = require('./get');
 const postHandlers = require('./post');
+const putHandelrs = require('./put');
 const deleteHandlers = require('./delete');
 
 // GET Routes
@@ -51,6 +52,9 @@ const rawBody = () =>
 // Use a raw body parser for POST, which will give a `Buffer` Object or `{}` at `req.body`
 // You can use Buffer.isBuffer(req.body) to test if it was parsed by the raw body parser.
 router.post('/fragments', rawBody(), postHandlers.createFragment);
+
+// PUT route
+router.put('/fragments/:id', rawBody(), putHandelrs.updateFragment);
 
 // Delete Route
 router.delete('/fragments/:id', deleteHandlers.deleteFragmentById);

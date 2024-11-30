@@ -15,6 +15,10 @@ module.exports.isConversionPossible = (originalType, requestedType) => {
     'text/markdown': ['md', 'html', 'txt'],
     'text/html': ['html', 'txt'],
     'application/json': ['json', 'txt'],
+    'image/png': ['png', 'jpg', 'jpeg', 'webp', 'gif'],
+    'image/jpeg': ['png', 'jpg', 'jpeg', 'webp', 'gif'],
+    'image/webp': ['png', 'jpg', 'jpeg', 'webp', 'gif'],
+    'image/gif': ['png', 'jpg', 'jpeg', 'webp', 'gif'],
   };
 
   // Check if the original type and requested type are defined and not null
@@ -54,6 +58,11 @@ module.exports.separateIdExtensionAndMediaType = (idWithExtension) => {
     md: 'text/markdown',
     html: 'text/html',
     json: 'application/json',
+    png: 'image/png',
+    jpg: 'image/jpeg',
+    jpeg: 'image/jpeg',
+    webp: 'image/webp',
+    gif: 'image/gif',
   };
 
   // Find the last occurrence of a dot (.)
@@ -142,6 +151,18 @@ module.exports.convertJSONToText = function (rawData) {
   } catch {
     throw new Error('Failed to convert JSON to plain text');
   }
+};
+
+/**
+ * Converts a fragment from one image format to another.
+ * @param {Buffer} rawData - The raw binary data of the fragment.
+ * @param {string} toExt - The extension representing the desired conversion type.
+ * @returns {Buffer} - The converted image buffer.
+ */
+module.exports.convertImageFormat = async function (rawData, toExt) {
+  const image = sharp(rawData);
+  image.toFormat(toExt);
+  return await image.toBuffer();
 };
 
 /**

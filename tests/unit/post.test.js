@@ -3,6 +3,10 @@
 const request = require('supertest');
 
 const app = require('../../src/app');
+const fs = require('fs');
+const path = require('path');
+
+const imageExtensions = ['png', 'jpg', 'webp', 'gif'];
 
 describe('POST /v1/fragments (Credential, Unauthorized, Unauthenticated, Plain Text Creation)', () => {
   // If the request is missing the Authorization header, it should be forbidden
@@ -114,5 +118,44 @@ describe('POST /v1/fragments (Texts - JSON, HTML, Markdown)', () => {
     expect(response.body.status).toBe('ok');
     expect(response.body.fragment.id).toBeDefined();
     expect(response.body.fragment.type).toBe('text/markdown');
+  });
+});
+
+describe('POST /v1/fragments (Images - PNG, JPG/JPEG, GIF, WEBP)', () => {
+  imageExtensions.forEach((ext) => {
+    test(`Authorized user should create a fragment with content type image/${ext}`, async () => {
+      const imagePath = path.join(__dirname, `../images/test.${ext}`);
+      const imageBuffer = fs.readFileSync(imagePath);
+
+      if (ext === 'jpg') ext = 'jpeg';
+
+      const response = await request(app)
+        .post('/v1/fragments')
+        .set('Content-Type', `image/${ext}`)
+        .auth('user1@email.com', 'password1')
+        .send(imageBuffer);
+
+      expect(response.status).toBe(201);
+      expect(response.body.status).toBe('ok');
+      expect(response.body.fragment.id).toBeDefined();
+      expect(response.body.fragment.type).toBe(`image/${ext}`);
+    });
+  });
+
+  imageExtensions.forEach((ext) => {
+    test(`Authorized user should get an Error when tries to create invalid image content and content type image/${ext}`, async () => {
+      if (ext === 'jpg') ext = 'jpeg';
+
+      const response = await request(app)
+        .post('/v1/fragments')
+        .set('Content-Type', `image/${ext}`)
+        .auth('user1@email.com', 'password1')
+        .send('invalid');
+
+      expect(response.status).toBe(415);
+      expect(response.body.status).toBe('error');
+      expect(response.body.error.code).toBe(415);
+      expect(response.body.error.message).toBeDefined();
+    });
   });
 });
